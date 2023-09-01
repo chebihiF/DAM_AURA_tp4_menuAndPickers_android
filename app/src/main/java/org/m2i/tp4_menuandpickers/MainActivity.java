@@ -1,8 +1,11 @@
 package org.m2i.tp4_menuandpickers;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -40,8 +43,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.context_edit)
         {
-            // processing ...
-            Toast.makeText(this,"this is the edit menu", Toast.LENGTH_LONG).show();
+            onClickShowAlert();
             return true;
         }else if (item.getItemId() == R.id.context_share){
             // processing ...
@@ -83,5 +85,25 @@ public class MainActivity extends AppCompatActivity {
 
     private void showSettings() {
         Toast.makeText(this,"this is the Settings menu",Toast.LENGTH_LONG).show();
+    }
+
+    public void onClickShowAlert(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        alertDialog.setTitle("Edit Text");
+        alertDialog.setMessage("change the text content ....");
+        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"this is the edit menu", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"Cancel state", Toast.LENGTH_LONG).show();
+            }
+        });
+        alertDialog.show();
     }
 }
